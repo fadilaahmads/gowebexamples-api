@@ -11,6 +11,10 @@ func main() {
 		fmt.Fprintf(w, "Hello, you've requested this %s path", r.URL.Path)
 	})
 
+	// Serving Static Assets
+	fs := http.FileServer(http.Dir("static/"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	// Accept connection
 	http.ListenAndServe(":80", nil)
 }
