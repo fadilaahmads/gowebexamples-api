@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 
@@ -23,6 +24,12 @@ func GetBooks(w http.ResponseWriter, r *http.Request) {
 func main() {
 	// Create New Router
 	r := mux.NewRouter()
+
+	// Configure the database connection (always check errors)
+	db, err := sql.Open("mysql", "username:password@(127.0.0.1:3306)/dbname?parseTime=true")
+
+	// Initialize the first connection to the database, to see if everything works correctly.
+	err := db.Ping()
 
 	r.HandleFunc("/", Homepage).Methods("GET")
 
