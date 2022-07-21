@@ -3,18 +3,26 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	// Registering a Request Handler
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, you've requested this %s path", r.URL.Path)
+	// Create New Router
+	r := mux.NewRouter()
+
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Welcome to My Bookstore!")
 	})
 
-	// Serving Static Assets
-	fs := http.FileServer(http.Dir("static/"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	r.HandleFunc("/books/{title}/page/{page}", func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		// Segmenting Request
+		title := vars["title"]
+		page := vars["page"]
 
-	// Accept connection
-	http.ListenAndServe(":80", nil)
+		fmt.Fprintf(w, "You requested book: %s on page %s\n", title, page)
+	})
+
+	http.ListenAndServe(":80", r)
 }
