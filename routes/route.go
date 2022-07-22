@@ -7,7 +7,8 @@ import (
 )
 
 func Routes(r *mux.Router) {
-	r.HandleFunc("/create/table/user", controller.CreateUserTable)
+	r.HandleFunc("/table/create/user", controller.CreateUserTable)
+	r.HandleFunc("/user/delete/{id}", controller.DeleteSingleUser)
 
 	r.HandleFunc("/", controller.Homepage).Methods("GET")
 
