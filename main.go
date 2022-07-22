@@ -11,11 +11,7 @@ func main() {
 	// Create New Router
 	r := mux.NewRouter()
 
-	r.HandleFunc("/", routes.Homepage).Methods("GET")
+	routes.Routes(r)
 
-	r.HandleFunc("/books/{title}/page/{page}", routes.GetBooks).Methods("POST")
-
-	r.HandleFunc("/db/", routes.Database).Methods("GET")
-
-	http.ListenAndServe(":80", r)
+	http.ListenAndServe(":4444", r)
 }
