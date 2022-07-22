@@ -2,27 +2,19 @@ package repository
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func NewDB() *sql.DB {
-	var (
-		host     = "127.0.0.1"
-		port     = "3306"
-		username = "root"
-		password = ""
-		dbname   = "gowebexamples"
-	)
-
-	psqlInfo := fmt.Sprintf("host= %s port= %s user= %s "+"password= %s dbname= %s", host, port, username, password, dbname)
-
-	db, err := sql.Open("mysql", psqlInfo)
+	// Configure the database connection (always check errors)
+	db, err := sql.Open("mysql", "root:@(127.0.0.1:3306)/gowebexamples?parseTime=true")
 	if err != nil {
 		log.Fatal(err)
 	}
 	if err := db.Ping(); err != nil {
-		log.Fatal()
+		log.Fatal(err)
 	}
 
 	return db
