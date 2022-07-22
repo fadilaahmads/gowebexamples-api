@@ -11,6 +11,13 @@ import (
 func CreateUserTable(w http.ResponseWriter, r *http.Request) {
 	repository.CreateUsersTable()
 }
+
+func DeleteSingleUser(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	repository.DeleteSingleUser(id)
+}
+
 func Homepage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to My Bookstore!")
 }
