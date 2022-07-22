@@ -18,6 +18,10 @@ func DeleteSingleUser(w http.ResponseWriter, r *http.Request) {
 	repository.DeleteSingleUser(id)
 }
 
+func InsertNewUser(w http.ResponseWriter, r *http.Request) {
+	repository.InsertNewUser()
+}
+
 func Homepage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to My Bookstore!")
 }
