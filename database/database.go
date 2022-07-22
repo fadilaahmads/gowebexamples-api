@@ -35,7 +35,7 @@ func DB() {
 		}
 	}
 
-	{
+	{ // Insert new user
 		username := "John Doe"
 		password := "secret"
 		createdAt := time.Now()
@@ -51,6 +51,22 @@ func DB() {
 			log.Fatal(err)
 		}
 		fmt.Println(id)
+	}
+
+	{ // Query a single user
+		var (
+			id        int
+			username  string
+			password  string
+			createdAt time.Time
+		)
+
+		query := "SELECT id, username, password, created_at FROM users WHERE id = ?"
+		if err := db.QueryRow(query, 1).Scan(&id, &username, &password, &createdAt); err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println(id, username, password, createdAt)
 	}
 
 }
