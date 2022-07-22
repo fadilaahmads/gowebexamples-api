@@ -1,25 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"web-api/database"
+	"web-api/routes"
 
 	"github.com/gorilla/mux"
 )
-
-func Homepage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to My Bookstore!")
-}
-
-func GetBooks(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	// Segmenting Request
-	title := vars["title"]
-	page := vars["page"]
-
-	fmt.Fprintf(w, "You requested book: %s on page %s\n", title, page)
-}
 
 func main() {
 	// Create New Router
@@ -27,9 +14,9 @@ func main() {
 
 	database.DB()
 
-	r.HandleFunc("/", Homepage).Methods("GET")
+	r.HandleFunc("/", routes.Homepage).Methods("GET")
 
-	r.HandleFunc("/books/{title}/page/{page}", GetBooks).Methods("POST")
+	r.HandleFunc("/books/{title}/page/{page}", routes.GetBooks).Methods("POST")
 
 	http.ListenAndServe(":80", r)
 }
