@@ -1,9 +1,9 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"net/http"
+	"web-api/database"
 
 	"github.com/gorilla/mux"
 )
@@ -25,11 +25,7 @@ func main() {
 	// Create New Router
 	r := mux.NewRouter()
 
-	// Configure the database connection (always check errors)
-	db, err := sql.Open("mysql", "username:password@(127.0.0.1:3306)/dbname?parseTime=true")
-
-	// Initialize the first connection to the database, to see if everything works correctly.
-	err := db.Ping()
+	database.DB()
 
 	r.HandleFunc("/", Homepage).Methods("GET")
 
