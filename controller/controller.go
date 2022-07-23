@@ -13,9 +13,13 @@ func CreateUserTable(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteSingleUser(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
-	repository.DeleteSingleUser(id)
+	// vars := mux.Vars(r)
+	// id := vars["id"]
+	repository.DeleteSingleUser()
+}
+
+func GetAllUser(w http.ResponseWriter, r *http.Request) {
+	repository.GetAllUser()
 }
 
 func InsertNewUser(w http.ResponseWriter, r *http.Request) {
