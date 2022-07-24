@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"web-api/routes"
 
@@ -13,5 +14,8 @@ func main() {
 
 	routes.Routes(r)
 
-	http.ListenAndServe(":4444", r)
+	err := http.ListenAndServe(":4444", r)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
