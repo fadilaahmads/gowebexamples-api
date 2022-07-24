@@ -20,6 +20,12 @@ func DeleteSingleUser(w http.ResponseWriter, r *http.Request) {
 	repository.DeleteSingleUser()
 }
 
+func Forms(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("view/forms.html"))
+	services.Forms(r)
+	tmpl.Execute(w, struct{ Success bool }{true})
+}
+
 func GetAllUser(w http.ResponseWriter, r *http.Request) {
 	repository.GetAllUser()
 }

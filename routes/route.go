@@ -9,6 +9,7 @@ import (
 )
 
 func Routes(r *mux.Router) {
+	r.HandleFunc("/forms/", controller.Forms)
 	r.HandleFunc("/table/create/user", controller.CreateUserTable)
 	r.HandleFunc("/user/delete/{id}", controller.DeleteSingleUser)
 	r.HandleFunc("/user/add/", controller.InsertNewUser)
