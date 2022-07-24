@@ -7,7 +7,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func NewDB() *sql.DB {
+func NewDB() (*sql.DB, error) {
 	// Configure the database connection (always check errors)
 	db, err := sql.Open("mysql", "root:@(127.0.0.1:3306)/gowebexamples?parseTime=true")
 	if err != nil {
@@ -17,5 +17,5 @@ func NewDB() *sql.DB {
 		log.Fatal(err)
 	}
 
-	return db
+	return db, nil
 }
