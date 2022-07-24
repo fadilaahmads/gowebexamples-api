@@ -3,7 +3,9 @@ package controller
 import (
 	"fmt"
 	"net/http"
+	"text/template"
 	"web-api/repository"
+	"web-api/services"
 
 	"github.com/gorilla/mux"
 )
@@ -37,4 +39,9 @@ func GetBooks(w http.ResponseWriter, r *http.Request) {
 	page := vars["page"]
 
 	fmt.Fprintf(w, "You requested book: %s on page %s\n", title, page)
+}
+
+func Todo(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("view/layout.html"))
+	tmpl.Execute(w, services.TodoTemplate())
 }
