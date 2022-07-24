@@ -1,7 +1,9 @@
 package routes
 
 import (
+	"net/http"
 	"web-api/controller"
+	"web-api/services"
 
 	"github.com/gorilla/mux"
 )
@@ -11,6 +13,7 @@ func Routes(r *mux.Router) {
 	r.HandleFunc("/user/delete/{id}", controller.DeleteSingleUser)
 	r.HandleFunc("/user/add/", controller.InsertNewUser)
 	r.HandleFunc("/user/get/all", controller.GetAllUser)
+	r.Handle("/static/", http.StripPrefix("/static/", *services.StaticFiles()))
 	r.HandleFunc("/todo/", controller.Todo)
 	r.HandleFunc("/", controller.Homepage).Methods("GET")
 
