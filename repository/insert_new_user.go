@@ -7,7 +7,7 @@ import (
 )
 
 func InsertNewUser() {
-	db, err := NewDB().Begin()
+	db, err := NewDB()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,4 +27,5 @@ func InsertNewUser() {
 		log.Fatal(err)
 	}
 	fmt.Println(id)
+	defer db.Close()
 }

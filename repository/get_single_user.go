@@ -7,7 +7,7 @@ import (
 )
 
 func GetSingleUser() {
-	db, err := NewDB().Begin()
+	db, err := NewDB()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -23,6 +23,6 @@ func GetSingleUser() {
 	if err := db.QueryRow(query, 1).Scan(&id, &username, &password, &createdAt); err != nil {
 		log.Fatal(err)
 	}
-
+	defer db.Close()
 	fmt.Println(id, username, password, createdAt)
 }

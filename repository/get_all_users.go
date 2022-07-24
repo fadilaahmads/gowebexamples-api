@@ -7,7 +7,7 @@ import (
 )
 
 func GetAllUser() {
-	db, err := NewDB().Begin()
+	db, err := NewDB()
 	if err != nil {
 		log.Fatal(err)
 	}

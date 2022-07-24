@@ -6,7 +6,7 @@ import (
 )
 
 func CreateUsersTable() {
-	db, err := NewDB().Begin()
+	db, err := NewDB()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -23,4 +23,5 @@ func CreateUsersTable() {
 		log.Fatal(err)
 	}
 	fmt.Println("Table has been created!")
+	defer db.Close()
 }
